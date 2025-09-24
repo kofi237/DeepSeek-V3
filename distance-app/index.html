@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera Distance Measure</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Camera Distance Measure</h1>
+      <p>Use your phone camera to estimate the distance to an object by marking its top and bottom in the captured frame.</p>
+    </header>
+
+    <section class="controls">
+      <div class="control-group">
+        <label for="actual-height">Actual object height (cm)</label>
+        <input id="actual-height" type="number" min="1" value="170" />
+      </div>
+      <div class="control-group">
+        <label for="fov">Camera vertical FOV (degrees)</label>
+        <input id="fov" type="number" min="10" max="120" value="60" />
+        <small>Default is 60°. You can calibrate this value using a known distance.</small>
+      </div>
+      <div class="buttons">
+        <button id="start">Start camera</button>
+        <button id="capture" disabled>Capture frame</button>
+        <button id="reset" disabled>Reset points</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="viewer">
+      <div class="video-wrapper">
+        <video id="video" autoplay playsinline></video>
+        <canvas id="overlay"></canvas>
+      </div>
+      <p class="hint">Tap or click on the captured frame to mark the bottom and top of the object.</p>
+    </section>
+
+    <section class="result">
+      <h2>Estimated Distance</h2>
+      <output id="distance">–</output>
+      <p class="explanation">Distance is computed from the relative height of the object in the frame and the vertical field of view.</p>
+    </section>
+
+    <section class="troubleshooting">
+      <h2>Tips</h2>
+      <ul>
+        <li>Stand still after capturing the frame to avoid motion blur.</li>
+        <li>Measure an object whose actual height you know precisely.</li>
+        <li>Calibrate the FOV by measuring a known distance and adjusting the value until it matches.</li>
+      </ul>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
